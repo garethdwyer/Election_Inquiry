@@ -1,45 +1,61 @@
+# SECOND ELECTION!!!
 # import modules
 import os
-import csv 
-
-election_csv = os.path.join('..', 'Downloads', 'election_data_2.txt')
-
-# total number of votes cast
-
-print("Election Results")
-print("---------------------------")
-
-voter_id_tot = 0
-with open(election_csv, 'r') as count_file:
-    csv_reader = csv.reader(count_file)
-    for row in csv_reader:
-        voter_id_tot += 1
-
-print('Total Votes : ', voter_id_tot)
-print("----------------------------")
-
-# Complete list of Candidates
-
-import os 
 import csv
 import collections
-import numbers 
-
+# read data into counter to create candidate field
+# set path for file
 election_csv = os.path.join('..', 'Downloads', 'election_data_2.txt')
-
+print("Election Results # 2: ")
+print("-"*50)
 candidates = collections.Counter()
-totalvotes = collections.Counter()
-with open(election_csv) as input_file: 
-    for row in csv.reader(input_file, delimiter=","): 
+voter_id_tot = 0
+# open the cvs and loop through the votes
+with open(election_csv, 'r') as count_file:
+    csv_reader = csv.reader(count_file, delimiter=",")
+    next(csv_reader)
+    for row in csv_reader:
         candidates[row[2]] += 1
-        # candidates[row[2]] / totalvotes[row[0]] * 100. Trying to print the percentage each candidate received from the total vote
-print('Correy:   %s' % candidates['Correy'])
-print('Khan:     %s' % candidates['Khan'])
-print('Li:       %s' % candidates['Li'])
-print("O'Tooley: %s" % candidates["O'Tooley"])
-
+# total number of votes cast
+voter_id_tot = sum(candidates.values())
+print('Total Votes : {}'.format(voter_id_tot))
+print("-"*50)
+# the percentage each candidate received over the total number of votes cast
+for candidate in candidates.keys():
+    print('{}:  {:.1f}% ({})'.format(candidate,  float(candidates[candidate]) * 100.0 / voter_id_tot, candidates[candidate]))
 # print(candidates.most_common())
-print("------------------------------")
+print("-"*50)
+print("Winner: {}".format(candidates.most_common(1)[0][0]))
+print("-"*50)
 
-print("Winner: Khan")
-print("-------------------------------")
+
+
+
+# FIRST ELECTION!!! 
+import os
+import csv
+import collections
+# read data into counter to create candidate field
+# set path for file
+election_csv = os.path.join('..', 'Downloads', 'election_data_1 (1).txt')
+print("Election Results # 1")
+print("-"*50)
+candidates = collections.Counter()
+voter_id_tot = 0
+# open the cvs and loop through the votes
+with open(election_csv, 'r') as count_file:
+    csv_reader = csv.reader(count_file, delimiter=",")
+    next(csv_reader)
+    for row in csv_reader:
+        candidates[row[2]] += 1
+# total number of votes cast
+voter_id_tot = sum(candidates.values())
+print('Total Votes : {}'.format(voter_id_tot))
+print("-"*50)
+# the percentage each candidate received over the total number of votes cast
+for candidate in candidates.keys():
+    print('{}:  {:.1f}% ({})'.format(candidate,  float(candidates[candidate]) * 100.0 / voter_id_tot, candidates[candidate]))
+# print(candidates.most_common())
+print("-"*50)
+print("Winner: {}".format(candidates.most_common(1)[0][0]))
+print("-"*50)
